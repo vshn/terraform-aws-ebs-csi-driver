@@ -2,6 +2,6 @@
 
 This module does the following:
 
-- Create IAM policy for EFS CSI
-- Create EFS CSI Driver Role
-- Deploy EFS CSI Helm Chart
+- Create IAM policy for EBS CSI
+- Create EBS CSI Driver Role
+- Deploy EBS CSI Helm Chart
