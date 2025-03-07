@@ -27,6 +27,7 @@ resource "helm_release" "csi" {
   set {
     name  = "controller.serviceAccount.create"
     value = "true"
+    type  = "bool"
   }
 
   set {
