@@ -1,6 +1,9 @@
 # Changelog
 
 ## v1.4.1
+- Update controller.serviceAccount.create type to auto
+
+## v1.4.1
 - Update controller.serviceAccount.create to  a boolean
 
 ## v1.4.0
