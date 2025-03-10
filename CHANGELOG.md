@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.4.1
+- Update controller.serviceAccount.create to  a boolean
+
 ## v1.4.0
 - Update terraform-aws-modules/iam/aws to v5.53.0
 
