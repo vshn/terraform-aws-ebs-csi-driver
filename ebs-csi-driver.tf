@@ -24,21 +24,21 @@ resource "helm_release" "csi" {
   timeout         = 300
   version         = var.helm_chart_version
 
-  set {
-    name  = "controller.serviceAccount.create"
-    value = "true"
-    type  = "auto"
-  }
-
-  set {
-    name  = "controller.serviceAccount.name"
-    value = var.csi_sa_name
-    type  = "string"
-  }
-
-  set {
-    name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com\\/role\\-arn"
-    value = module.ebs_controller_role.iam_role_arn
-    type  = "string"
-  }
+  set = [
+    {
+      name  = "controller.serviceAccount.create"
+      value = "true"
+      type  = "auto"
+    },
+    {
+      name  = "controller.serviceAccount.name"
+      value = var.csi_sa_name
+      type  = "string"
+    },
+    {
+      name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com\\/role\\-arn"
+      value = module.ebs_controller_role.iam_role_arn
+      type  = "string"
+    }
+  ]
 }
