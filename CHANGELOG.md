@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.9.0
+- Update data structure of Set attribute in helm release resource
+
 ## v1.8.0
 - Update terraform-aws-modules/iam/aws to v5.59.0
 
