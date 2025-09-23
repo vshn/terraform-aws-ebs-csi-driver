@@ -4,11 +4,11 @@ resource "aws_iam_policy" "ebs_controller_policy" {
 }
 
 module "ebs_controller_role" {
-  source                        = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version                       = "6.2.1"
-  description                   = "EBS CSI Driver Role"
-  name                          = "ebs-csi-driver-policy"
-  use_name_prefix               = true
+  source          = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version         = "6.2.1"
+  description     = "EBS CSI Driver Role"
+  name            = "ebs-csi-driver-policy"
+  use_name_prefix = true
   oidc_providers = {
     provider = {
       provider_arn               = var.oidc_provider_arn
