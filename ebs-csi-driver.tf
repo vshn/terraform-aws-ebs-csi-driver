@@ -4,14 +4,20 @@ resource "aws_iam_policy" "ebs_controller_policy" {
 }
 
 module "ebs_controller_role" {
-  source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version                       = "5.60.0"
-  create_role                   = true
-  role_description              = "EBS CSI Driver Role"
-  role_name_prefix              = "ebs-csi-driver-policy"
-  provider_url                  = var.oidc_provider_url
-  role_policy_arns              = [aws_iam_policy.ebs_controller_policy.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:${var.csi_namespace}:${var.csi_sa_name}"]
+  source                        = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version                       = "6.2.1"
+  description                   = "EBS CSI Driver Role"
+  name                          = "ebs-csi-driver-policy"
+  use_name_prefix               = true
+  oidc_providers = {
+    provider = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = ["${var.csi_namespace}:${var.csi_sa_name}"]
+    }
+  }
+  policies = {
+    efs_csi_policy = aws_iam_policy.ebs_controller_policy.arn
+  }
 }
 
 resource "helm_release" "csi" {
@@ -37,7 +43,7 @@ resource "helm_release" "csi" {
     },
     {
       name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com\\/role\\-arn"
-      value = module.ebs_controller_role.iam_role_arn
+      value = module.ebs_controller_role.arn
       type  = "string"
     }
   ]

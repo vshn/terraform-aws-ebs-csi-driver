@@ -13,6 +13,7 @@ variable "helm_chart_version" {
   type = string
 }
 
-variable "oidc_provider_url" {
-  type = string
+variable "oidc_provider_arn" {
+  description = "The arn of the openid connect provider."
+  type        = string
 }
